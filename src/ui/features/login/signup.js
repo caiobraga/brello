@@ -8,6 +8,8 @@ const SignupScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [cpf, setCpf] = useState('');
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -21,16 +23,26 @@ const SignupScreen = () => {
     setPassword(event.target.value);
   };
 
+  const handlePhoneChange = (event) => {
+    setPhone(event.target.value);
+  };
+
+  const handleCpfChange = (event) => {
+    setCpf(event.target.value);
+  };
+
   const handleSignup = (event) => {
     event.preventDefault();
 
     // Perform signup logic here, such as making an API call
-    // with the entered name, email, and password to create a new user
+    // with the entered name, email, password, phone, and cpf to create a new user
 
     // Reset the form
     setName('');
     setEmail('');
     setPassword('');
+    setPhone('');
+    setCpf('');
   };
 
   return (
@@ -79,7 +91,36 @@ const SignupScreen = () => {
           />
         </label>
         <br />
-        <Button type="submit" mt={20} style={{ width: '100%', height: '25px', backgroundColor: 'black', color: 'white' }}>
+        <label>
+          Phone:
+          <Input
+            type="text"
+            value={phone}
+            onChange={handlePhoneChange}
+            className="input-field"
+          />
+        </label>
+        <br />
+        <label>
+          CPF:
+          <Input
+            type="text"
+            value={cpf}
+            onChange={handleCpfChange}
+            className="input-field"
+          />
+        </label>
+        <br />
+        <Button
+          type="submit"
+          mt={20}
+          style={{
+            width: '100%',
+            height: '28px',
+            backgroundColor: 'black',
+            color: 'white',
+          }}
+        >
           Signup
         </Button>
       </form>

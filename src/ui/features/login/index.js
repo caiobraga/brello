@@ -71,7 +71,7 @@ const LoginScreen = () => {
         </label>
         <br />
         <Button type="submit" mt={20}
-          style={{ width: '100%', height:'25px',  backgroundColor: 'black', color: 'white' }}
+          style={{ width: '100%', height:'28px',  backgroundColor: 'black', color: 'white' }}
           >
           Login
         </Button>
