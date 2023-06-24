@@ -3,7 +3,7 @@ import { Box, Input, Button } from '@chakra-ui/react';
 import { FaUser } from 'react-icons/fa';
 import { Link, Text } from '@chakra-ui/react';
 import './style.css';
-
+import backgroundImage from './logo.png'; // Import the image file
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -36,6 +36,8 @@ const LoginScreen = () => {
       justifyContent="center"
       height="100vh"
       position="relative"
+      background={`url(${backgroundImage})`} // Set the background image
+      backgroundSize="cover"
     >
       <Box position="relative">
         <h2>Login</h2>
@@ -44,7 +46,6 @@ const LoginScreen = () => {
           top="-50px"
           left="50%"
           transform="translateX(-50%)"
-          
         >
           <FaUser size={60} />
         </Box>
@@ -70,13 +71,22 @@ const LoginScreen = () => {
           />
         </label>
         <br />
-        <Button type="submit" mt={20}
-          style={{ width: '100%', height:'28px',  backgroundColor: 'black', color: 'white' }}
-          >
+        <Button
+          type="submit"
+          mt={20}
+          style={{
+            width: '100%',
+            height: '28px',
+            backgroundColor: 'black',
+            color: 'white',
+          }}
+        >
           Login
         </Button>
       </form>
-      <p style={{ marginTop: '10px' }}>Don't have an account? <Link href="/signup">Sign up</Link></p>
+      <p style={{ marginTop: '10px' }}>
+        Don't have an account? <Link href="/signup">Sign up</Link>
+      </p>
     </Box>
   );
 };

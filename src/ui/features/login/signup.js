@@ -3,6 +3,7 @@ import { Box, Input, Button } from '@chakra-ui/react';
 import { FaUser } from 'react-icons/fa';
 import { Link } from '@chakra-ui/react';
 import './style.css';
+import backgroundImage from './logo.png'; // Import the image file
 
 const SignupScreen = () => {
   const [name, setName] = useState('');
@@ -53,6 +54,8 @@ const SignupScreen = () => {
       justifyContent="center"
       height="100vh"
       position="relative"
+      background={`url(${backgroundImage})`} // Set the background image
+      backgroundSize="cover"
     >
       <Box position="relative">
         <h2>Signup</h2>
