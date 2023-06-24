@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-
+import { NavBar } from '../../components/navbar';
 const LoginScreen = () => {
     const history = useHistory();
 
