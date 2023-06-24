@@ -12,9 +12,18 @@ import {
 
 import  Navbar  from '../../components/navbar';
 
+import { useHistory } from 'react-router-dom';
+
+
 const DashboardScreen = () => {
+    const history = useHistory();
+
   const [projects, setProjects] = useState([]);
   const [newProjectName, setNewProjectName] = useState('');
+
+  const handleButtonClick = () => {
+    history.push('/project');
+  };
 
   const handleCreateProject = () => {
     if (newProjectName) {
@@ -43,14 +52,22 @@ const DashboardScreen = () => {
 
       <VStack spacing={4} align="start">
         {projects.map((project, index) => (
-          <Box
+           <Box
             key={index}
             p={4}
             borderWidth={1}
             borderRadius="md"
             boxShadow="md"
+            bg="white"
+            onClick={handleButtonClick}
           >
-            <Text>{project}</Text>
+            <Heading size="md" mb={2}>
+              {project}
+            </Heading>
+            <Text>Project description goes here...</Text>
+            <Button mt={4} colorScheme="teal">
+              Open Project
+            </Button>
           </Box>
         ))}
       </VStack>
