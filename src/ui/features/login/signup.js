@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Box, Input, Button } from '@chakra-ui/react';
 import { FaUser } from 'react-icons/fa';
-import { Link, Text } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/react';
 import './style.css';
 
-
-const LoginScreen = () => {
+const SignupScreen = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -17,13 +21,14 @@ const LoginScreen = () => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSignup = (event) => {
     event.preventDefault();
 
-    // Perform login logic here, such as making an API call
-    // with the entered email and password
+    // Perform signup logic here, such as making an API call
+    // with the entered name, email, and password to create a new user
 
     // Reset the form
+    setName('');
     setEmail('');
     setPassword('');
   };
@@ -38,18 +43,22 @@ const LoginScreen = () => {
       position="relative"
     >
       <Box position="relative">
-        <h2>Login</h2>
-        <Box
-          position="absolute"
-          top="-50px"
-          left="50%"
-          transform="translateX(-50%)"
-          
-        >
+        <h2>Signup</h2>
+        <Box position="absolute" top="-50px" left="50%" transform="translateX(-50%)">
           <FaUser size={60} />
         </Box>
       </Box>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSignup}>
+        <label>
+          Name:
+          <Input
+            type="text"
+            value={name}
+            onChange={handleNameChange}
+            className="input-field"
+          />
+        </label>
+        <br />
         <label>
           Email:
           <Input
@@ -70,15 +79,15 @@ const LoginScreen = () => {
           />
         </label>
         <br />
-        <Button type="submit" mt={20}
-          style={{ width: '100%', height:'25px',  backgroundColor: 'black', color: 'white' }}
-          >
-          Login
+        <Button type="submit" mt={20} style={{ width: '100%', height: '25px', backgroundColor: 'black', color: 'white' }}>
+          Signup
         </Button>
       </form>
-      <p style={{ marginTop: '10px' }}>Don't have an account? <Link href="/signup">Sign up</Link></p>
+      <p style={{ marginTop: '10px' }}>
+        Already have an account? <Link href="/">Login</Link>
+      </p>
     </Box>
   );
 };
 
-export default LoginScreen;
+export default SignupScreen;
