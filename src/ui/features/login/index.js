@@ -1,24 +1,18 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-
-import { NavBar } from '../../components/navbar';import './style.css'; // Import the CSS file
+import { Box, Input, Button } from '@chakra-ui/react';
+import { FaUser } from 'react-icons/fa';
+import './style.css';
 
 const LoginScreen = () => {
-    const history = useHistory();
-
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-  };
-
-  const handleButtonClick = () => {
-    history.push('/dashbord');
   };
 
   const handleSubmit = (event) => {
@@ -33,31 +27,52 @@ const LoginScreen = () => {
   };
 
   return (
-
-    <div className="App" >
-      <h2>Login</h2>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      height="100vh"
+      position="relative"
+    >
+      <Box position="relative">
+        <h2>Login</h2>
+        <Box
+          position="absolute"
+          top="-50px"
+          left="50%"
+          transform="translateX(-50%)"
+          
+        >
+          <FaUser size={60} />
+        </Box>
+      </Box>
       <form onSubmit={handleSubmit}>
         <label>
           Email:
-          <input
+          <Input
             type="email"
             value={email}
             onChange={handleEmailChange}
+            className="input-field"
           />
         </label>
         <br />
         <label>
-          Password:
-          <input
+          Senha:
+          <Input
             type="password"
             value={password}
             onChange={handlePasswordChange}
+            className="input-field"
           />
         </label>
         <br />
-        <button type="submit" onClick={handleButtonClick} >Login</button>
+        <Button type="submit">
+          Login
+        </Button>
       </form>
-    </div>
+    </Box>
   );
 };
 
