@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar  from '../../components/navbar';
 
 const ProjectScreen = () => {
   const [projectName, setProjectName] = useState('');
@@ -17,6 +18,7 @@ const ProjectScreen = () => {
 
   return (
     <div>
+         <Navbar />
       <h2>Create Project</h2>
       <form onSubmit={handleSubmit}>
         <label>

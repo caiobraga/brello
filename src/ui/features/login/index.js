@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { NavBar } from '../../components/navbar';
 const LoginScreen = () => {
     const history = useHistory();
 
@@ -32,6 +31,7 @@ const LoginScreen = () => {
 
   return (
     <div className="App">
+       
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <label>
