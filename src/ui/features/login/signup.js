@@ -97,7 +97,7 @@ const SignupScreen = () => {
         <label>
           Phone:
           <Input
-            type="text"
+            type="tel"
             value={phone}
             onChange={handlePhoneChange}
             className="input-field"
@@ -107,7 +107,7 @@ const SignupScreen = () => {
         <label>
           CPF:
           <Input
-            type="text"
+            type="number"
             value={cpf}
             onChange={handleCpfChange}
             className="input-field"
