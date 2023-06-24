@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const LoginScreen = () => {
+    const history = useHistory();
+
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
+  };
+
+  const handleButtonClick = () => {
+    history.push('/dashbord');
   };
 
   const handleSubmit = (event) => {
@@ -24,7 +31,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <div>
+    <div className="App">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -45,7 +52,7 @@ const LoginScreen = () => {
           />
         </label>
         <br />
-        <button type="submit">Login</button>
+        <button type="submit" onClick={handleButtonClick} >Login</button>
       </form>
     </div>
   );
