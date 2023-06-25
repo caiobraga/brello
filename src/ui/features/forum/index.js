@@ -1,4 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import './style.css';
+import {
+  Box,
+  Flex,
+  Heading,
+  Input,
+  Stack,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
+import { Button, ButtonGroup } from '@chakra-ui/react'
+import Navbar from "../../components/navbar";
+import { AiFillMessage } from 'react-icons/ai'
+
+const Topic = ({ title }) => {
+  return (
+    <Flex border='1px solid gray' w = '500px' p='14px' m = '0px' justifyContent='space-between'>
+      <Text alignSelf='flex-start'>
+        {title}  
+      </Text>
+      <Button border='none'><AiFillMessage size='40px'> </AiFillMessage></Button>
+    </Flex>
+
+  )
+}
+
 
 const ForumScreen = () => {
   const [posts, setPosts] = useState([]);
@@ -7,6 +33,7 @@ const ForumScreen = () => {
     // Simulated API call to fetch forum posts
     fetchPosts();
   }, []);
+
 
   const fetchPosts = () => {
     // Simulated data
@@ -20,21 +47,40 @@ const ForumScreen = () => {
   };
 
   return (
-    <div>
-      <h2>Forum</h2>
-      {posts.length === 0 ? (
-        <p>Loading posts...</p>
-      ) : (
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>
-              <h3>{post.title}</h3>
-              <p>{post.content}</p>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+
+    <Box>
+      <Navbar></Navbar>
+      <h2 className='homeTitle'>Faça sua pergunta</h2>
+      <form onSubmit={posts}>
+        <Flex>
+          <Input
+            flex="1"
+            mr={2}
+            size='md'
+            placeholder="CRIAR TOPICO"
+          />
+          <Button colorScheme='blue' size='xs' >POSTAR </Button>
+        </Flex>
+
+      </form>
+      <Flex flexDirection='column' p = '20px' gap = '10px'>
+        <Topic title='TOPICO 1'>
+    
+        </Topic>
+        <Topic title='TOPICO 2'>
+
+        </Topic>
+
+        <Topic title='TOPICO 3'>
+
+        </Topic>
+
+
+      </Flex>
+    </Box>
+
+
+
   );
 };
 
