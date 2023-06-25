@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { Box, Input, Button } from '@chakra-ui/react';
 import { FaUser } from 'react-icons/fa';
-import { Link, Text } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/react';
 import './style.css';
 import backgroundImage from './logo.png'; // Import the image file
 
-const LoginScreen = () => {
+const SignupScreen = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [cpf, setCpf] = useState('');
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -17,15 +24,26 @@ const LoginScreen = () => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handlePhoneChange = (event) => {
+    setPhone(event.target.value);
+  };
+
+  const handleCpfChange = (event) => {
+    setCpf(event.target.value);
+  };
+
+  const handleSignup = (event) => {
     event.preventDefault();
 
-    // Perform login logic here, such as making an API call
-    // with the entered email and password
+    // Perform signup logic here, such as making an API call
+    // with the entered name, email, password, phone, and cpf to create a new user
 
     // Reset the form
+    setName('');
     setEmail('');
     setPassword('');
+    setPhone('');
+    setCpf('');
   };
 
   return (
@@ -40,17 +58,22 @@ const LoginScreen = () => {
       backgroundSize="cover"
     >
       <Box position="relative">
-        <h2>Login</h2>
-        <Box
-          position="absolute"
-          top="-50px"
-          left="50%"
-          transform="translateX(-50%)"
-        >
+        <h2>Signup</h2>
+        <Box position="absolute" top="-50px" left="50%" transform="translateX(-50%)">
           <FaUser size={60} />
         </Box>
       </Box>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSignup}>
+        <label>
+          Name:
+          <Input
+            type="text"
+            value={name}
+            onChange={handleNameChange}
+            className="input-field"
+          />
+        </label>
+        <br />
         <label>
           Email:
           <Input
@@ -71,6 +94,26 @@ const LoginScreen = () => {
           />
         </label>
         <br />
+        <label>
+          Phone:
+          <Input
+            type="tel"
+            value={phone}
+            onChange={handlePhoneChange}
+            className="input-field"
+          />
+        </label>
+        <br />
+        <label>
+          CPF:
+          <Input
+            type="number"
+            value={cpf}
+            onChange={handleCpfChange}
+            className="input-field"
+          />
+        </label>
+        <br />
         <Button
           type="submit"
           mt={20}
@@ -81,14 +124,14 @@ const LoginScreen = () => {
             color: 'white',
           }}
         >
-          Login
+          Signup
         </Button>
       </form>
       <p style={{ marginTop: '10px' }}>
-        Don't have an account? <Link href="/signup">Sign up</Link>
+        Already have an account? <Link href="/">Login</Link>
       </p>
     </Box>
   );
 };
 
-export default LoginScreen;
+export default SignupScreen;
