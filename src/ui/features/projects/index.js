@@ -89,8 +89,8 @@ const Board = ({ name }) => {
 
 	return (
 		<Flex
-			minWidth="320px"
-			maxWidth="320px"
+			minW="320px"
+			maxW="320px"
 			border="2px solid gray"
 			borderRadius="14px"
 			flexDirection="column"
@@ -173,7 +173,7 @@ const ProjectScreen = () => {
 	}
 
 	return (
-		<Box className="App" height="100%">
+		<Box className="App">
 			{/* <ColorModeScript initialColorMode={theme.config.initialColorMode} /> */}
 			<Navbar></Navbar>
 			<Flex
@@ -181,13 +181,13 @@ const ProjectScreen = () => {
 				alignItems="flex-start"
 				px="14px"
 				gap="14px"
-				overflowX="auto">
+				overflow="auto">
 				<Flex alignItems="flex-start" px="14px" gap="14px">
 					{boardlist}
 				</Flex>
 				<Button
-					minWidth="44px"
-					minHeight="44px"
+					minW="44px"
+					minH="44px"
 					borderRadius="14px"
 					title="Criar quadro"
 					alt="Criar quadro"
