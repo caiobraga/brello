@@ -1,69 +1,144 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 
+import { useState } from 'react'
+import { FaPlus, FaWrench } from 'react-icons/fa';
+import { Box, Button, ColorModeScript, Flex, Input, useBoolean, Stack, Text } from "@chakra-ui/react";
 import Navbar from "../../components/navbar";
 
-import { Box, Button, Flex, Grid, Image } from "@chakra-ui/react";
+import theme from './theme';
+
 // import "./style.css"; // Import the CSS file
 
-const ProjectCell = ({name, info}) => {
+const colors = [
+    'lightblue',
+    'lightgray',
+    'lightgreen',
+    'lightpink',
+    'lightseagreen',
+    'lightskyblue',
+    'lightsteelblue',
+    'lightyellow'
+];
+
+function randomColor1() {
+    return colors[Math.floor(Math.random() * colors.length)]
+}
+
+function randomColor() {
+    const randPixel = () => 127 + Math.random() * 128
+
+    return `rgb(${randPixel()},${randPixel()},${randPixel()})`
+}
+
+const Card = ({content}) =>{
+    const [isHovering, setHovering] = useBoolean();
+
     return (
-        <Flex width={240} border='2px solid black' boxShadow='xl' rounded='md' flexDirection='column'>
-            <Flex flexDirection='column'>
-                <h1>{name}</h1>
-                <h3>{info}</h3>
+        <Flex p='14px' backgroundColor='lightgray' borderRadius='14px' justifyContent='space-between' onMouseEnter={setHovering.on} onMouseLeave={setHovering.off}>
+            <Text m='0' alignSelf='flex-start' whiteSpace='nowrap' overflow='hidden' textOverflow='ellipsis' fontSize='18px'>
+                {content}
+            </Text>
+            <Button
+                border='none'
+                borderRadius='14px'
+                title='Configurar cartão'
+                alt='Configurar cartão'
+                display='none'
+                style={{display: isHovering ? 'block' : 'none'}}>
+                <FaWrench></FaWrench>
+            </Button>
+        </Flex>
+    );
+};
+
+const Board = ({name}) => {
+    const [isHovering, setHovering] = useBoolean();
+    const [cardContent, setCardContent] = useState('');
+    const [cardList, setCardList] = useState([]);
+    const [backgroundColor, setBackgroundColor] = useState(randomColor())
+
+    function handleInput(e) {
+        setCardContent(e.target.value)
+    }
+
+    function handleClick() {
+        if (cardContent) {
+            setCardList(cardList.concat(<Card content={cardContent}></Card>))
+            setCardContent('')
+        }
+    }
+
+    return (
+        <Flex minWidth='320px' maxWidth='320px' border='2px solid gray' borderRadius='14px' flexDirection='column' overflow='hidden'>
+            <Flex p='8px' alignItems='center' justifyContent='space-between' backgroundColor={backgroundColor} onMouseEnter={setHovering.on} onMouseLeave={setHovering.off}>
+                {/* <Text m='0' textAlign='center' whiteSpace='nowrap' overflow='hidden' textOverflow='ellipsis' title={name} fontSize='22px'>
+                    {name}
+                </Text> */}
+                <Input
+                    textAlign='center'
+                    whiteSpace='nowrap'
+                    overflow='hidden'
+                    textOverflow='ellipsis'
+                    placeholder='Quadro sem título'
+                    backgroundColor='inherit'
+                    border='none'
+                    borderRadius='14px'
+                    fontSize='22px'
+                    onChange={
+                        (e) => {
+                            e.target.title =  e.target.value
+                            e.target.alt =  e.target.value
+                        }
+                    }
+                    title={name}/>
+                <Button
+                    w='24px'
+                    h='24px'
+                    border='none'
+                    borderRadius='14px'
+                    title='Configurar quadro'
+                    alt='Configurar quadro'
+                    style={{display: isHovering ? 'block' : 'none'}}>
+                    <FaWrench></FaWrench>
+                </Button>
+
             </Flex>
+            <Flex p='8px' overflow='hidden'>
+                <Input value={cardContent} border='2px solid lightgray' placeholder='novo cartão' px='8px' height='24px' flexGrow={1} borderRadius='14px 0px 0px 14px' onChange={handleInput}/>
+                <Button backgroundColor='lightgray' border='none' borderRadius='0px 14px 14px 0px' title='Adicionar cartão' alt='Adicionar cartão' onClick={(e) => {handleClick(e); e.target.value = ''}}><FaPlus></FaPlus></Button>
+            </Flex>
+            <Stack p='8px'>
+                {cardList}
+            </Stack>
         </Flex>
     );
 };
 
 const ProjectScreen = () => {
-	const history = useHistory();
+    const [boardlist, setBoardList] = useState([<Board name='Quadro sem título'></Board>]);
 
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const handleEmailChange = (event) => {
-		setEmail(event.target.value);
-	};
-
-	const handlePasswordChange = (event) => {
-		setPassword(event.target.value);
-	};
-
-	const handleButtonClick = () => {
-		history.push("/dashbord");
-	};
-
-	const handleSubmit = (event) => {
-		event.preventDefault();
-
-		// Perform login logic here, such as making an API call
-		// with the entered email and password
-
-		// Reset the form
-		setEmail("");
-		setPassword("");
-	};
+    function handleClick() {
+        setBoardList(boardlist.concat(<Board name='Quadro sem título'></Board>))
+    }
 
 	return (
-		<div className="App">
+        <Box className='App' height='100%'>
+            {/* <ColorModeScript initialColorMode={theme.config.initialColorMode} /> */}
 			<Navbar></Navbar>
-            <Flex flexStart px='14px' gap='14px'>
-                <ProjectCell name='teste' info='Lorem ipsum dolor simet, Lorem ipsum dolor simet, Lorem ipsum dolor simet, Lorem ipsum dolor simet, Lorem ipsum dolor simet'></ProjectCell>
-                <ProjectCell name='teste' info='Lorem ipsum dolor simets'></ProjectCell>
+            <Flex p='14px' alignItems='flex-start' px='14px' gap='14px' overflowX='auto'>
+                <Flex alignItems='flex-start' px='14px' gap='14px'>
+                    {boardlist}
+                </Flex>
+                <Button
+                    minWidth='44px'
+                    minHeight='44px'
+                    borderRadius='14px'
+                    title='Criar quadro'
+                    alt='Criar quadro'
+                    onClick={handleClick}>
+                    <FaPlus></FaPlus>
+                </Button>
             </Flex>
-            {/* <Grid px='auto' justifyContent='center' gridRowGap='14px' gridColumnGap='14px' gridAutoFlow='row dense' gridTemplateColumns='repeat(auto-fill, 240px)'>
-                <ProjectCell name='teste' info='Lorem ipsum dolor simets'></ProjectCell>
-                <ProjectCell name='teste' info='Lorem ipsum dolor simets'></ProjectCell>
-                <ProjectCell name='teste' info='Lorem ipsum dolor simets'></ProjectCell>
-                <ProjectCell name='teste' info='Lorem ipsum dolor simets'></ProjectCell>
-                <ProjectCell name='teste' info='Lorem ipsum dolor simets'></ProjectCell>
-                <ProjectCell name='teste' info='Lorem ipsum dolor simets'></ProjectCell>
-                <ProjectCell name='teste' info='Lorem ipsum dolor simets'></ProjectCell>
-                <ProjectCell name='teste' info='Lorem ipsum dolor simets'></ProjectCell>
-                <ProjectCell name='teste' info='Lorem ipsum dolor simets'></ProjectCell>
-            </Grid> */}
-		</div>
+        </Box>
 	);
 };
 
