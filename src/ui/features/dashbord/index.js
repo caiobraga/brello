@@ -40,6 +40,7 @@ const DashboardScreen = () => {
       <Flex mb={4}>
         <Input
           flex="1"
+          height={50}
           mr={2}
           placeholder="Enter project name"
           value={newProjectName}
