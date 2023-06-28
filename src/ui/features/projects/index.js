@@ -6,6 +6,7 @@ import {
 	ColorModeScript,
 	Flex,
 	Input,
+    Image,
 	useBoolean,
 	Stack,
 	Text,
