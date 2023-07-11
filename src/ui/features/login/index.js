@@ -7,6 +7,10 @@ import backgroundImage from './logo.png'; // Import the image file
 
 import { useHistory } from 'react-router-dom';
 
+import { Database } from '../../../data/bd.js';
+
+import {User} from '../../../data/bd.js';
+
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -27,12 +31,36 @@ const LoginScreen = () => {
 
     // Perform login logic here, such as making an API call
     // with the entered email and password
+    const db = new Database;
+    const listaUsuarios = db.getListaUsuarios();
 
+    // Verificar se o email e a senha fornecidos correspondem a algum usuário
+    if (listaUsuarios.length === 0) {
+      console.log('Nenhum usuário cadastrado.');
+    } else {
+      // Exibir log com todos os emails e senhas cadastrados
+      listaUsuarios.forEach((usuario) => {
+        console.log('Email:', usuario.email);
+        console.log('Senha:', usuario.password);
+      });
+    }
+    const user = listaUsuarios.find(
+      (usuario) => usuario.email === email && usuario.password === password
+    );
+
+    if (user) {
+      // Login bem-sucedido
+      // Redirecionar para a página de dashboard
+      history.push('/dashbord');
+    } else {
+      // Login inválido
+      // Exibir mensagem de erro
+      alert('Email ou senha incorretos');
+    }
     // Reset the form
     setEmail('');
     setPassword('');
 
-    history.push('/dashbord');
   };
 
   return (
