@@ -43,16 +43,15 @@ const SignupScreen = () => {
     event.preventDefault();
 
     // Atualiza o objeto User no banco de dados com os dados do formulário
-    const db = new Database;  
+    const db = new Database;
+    
+    if (!name || !email || !password || !phone || !cpf) {
+      alert('Por favor, preencha todas as informações antes de prosseguir.');
+      return;
+    }
     
     const newUser = new User(email, password, name, phone, cpf);
     db.addUserLista(newUser);
-
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Phone:', phone);
-    console.log('CPF:', cpf);
     
     //user.setUser(user);
     // Reset the form
