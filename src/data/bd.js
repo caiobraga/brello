@@ -1,118 +1,124 @@
-class Database {
-    constructor() {
-      if (Database.instance) {
-        return Database.instance;
-      }
-  
-      // Simulating database connection
-      this.connect();
-  
-      Database.instance = this;
+export class Database {
+        static instance = new this();
+        constructor() {
+        if (Database.instance) {
+            return Database.instance;
+        }
+    
+        
+    
+        Database.instance = this;
 
-      var currentUser = null;
+        var currentUser = null;
 
-      var listaUsuarios = [];
-      var litaGerentes = [];
-      var listaDesenvolvedores = [];
-      var listaPo = [];
-      var listaProjetos = [];
-      var listaQuadros = [];
-      var listaCartoes = [];
-    }
+        var listaUsuarios = [];
+        var litaGerentes = [];
+        var listaDesenvolvedores = [];
+        var listaPo = [];
+        var listaProjetos = [];
+        var listaQuadros = [];
+        var listaCartoes = [];
+        }
+
+        
 
     
-
-  
+        fetchProjectsFromDatabase() {
+            // Simulating fetching projects from the database
+            // Replace this implementation with your actual database query
+        
+            // Assuming listaProjetos contains the projects in the database
+            return this.listaProjetos;
+        }
     
-  
-  }
+    }
 
-  class GetId {
-    constructor() {
-      if (GetId.instance) {
-        return GetId.instance;
-      }
-  
-      this.id = 0;
-  
-      GetId.instance = this;
-    }
-  
-    getId() {
-      return this.id++;
-    }
-  }
-  
-  class User {
-    constructor(email, password, name, phone, cpf) {
-      this.email = email;
-      this.password = password;
-      this.name = name;
-      this.cpf = cpf;
-      this.phone = phone;
+    export class GetId {
+        constructor() {
+        if (GetId.instance) {
+            return GetId.instance;
+        }
+    
+        this.id = 0;
+    
+        GetId.instance = this;
+        }
+    
+        getId() {
+        return this.id++;
+        }
     }
     
+    export class User {
+        constructor(email, password, name, phone, cpf) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.cpf = cpf;
+        this.phone = phone;
+        }
+        
+        
+    }
     
-  }
-  
-  class Manager extends User {
-    constructor(email, password, name, department) {
-      super(email, password, name);
-      this.department = department;
+    export class Manager extends User {
+        constructor(email, password, name, department) {
+        super(email, password, name);
+        this.department = department;
+        }
+    
+        promoteDeveloper(developerEmail) {
+        // Aqui você pode adicionar a lógica para promover um desenvolvedor a gerente
+        }
     }
-  
-    promoteDeveloper(developerEmail) {
-      // Aqui você pode adicionar a lógica para promover um desenvolvedor a gerente
+    
+    export class Developer extends User {
+        constructor(email, password, name, programmingLanguage) {
+        super(email, password, name);
+        this.programmingLanguage = programmingLanguage;
+        }
+    
     }
-  }
-  
-  class Developer extends User {
-    constructor(email, password, name, programmingLanguage) {
-      super(email, password, name);
-      this.programmingLanguage = programmingLanguage;
+    
+    export class ProductOwner extends User {
+        constructor(email, password, name, project) {
+        super(email, password, name);
+        this.project = project;
+        }
     }
-  
-  }
-  
-  class ProductOwner extends User {
-    constructor(email, password, name, project) {
-      super(email, password, name);
-      this.project = project;
-    }
-  }
 
-  class Projeto {
-    constructor(nome, descricao, gerente) {
-      this.idProjeto = GetId().getId();
-      this.nome = nome;
-      this.descricao = descricao;
-      this.dataInicio = new Date();
-      this.dataFim = null;
-      this.gerente = gerente;
-      this.desenvolvedores = [];
+    export class Projeto {
+        constructor(nome, descricao, gerente) {
+        this.idProjeto = GetId().getId();
+        this.nome = nome;
+        this.descricao = descricao;
+        this.dataInicio = new Date();
+        this.dataFim = null;
+        this.gerente = gerente;
+        this.desenvolvedores = [];
+        }
+    
+        adicionarDesenvolvedor(desenvolvedor) {
+        this.desenvolvedores.push(desenvolvedor);
+        console.log(`Desenvolvedor ${desenvolvedor.nome} adicionado ao projeto ${this.nome}.`);
+        }
     }
-  
-    adicionarDesenvolvedor(desenvolvedor) {
-      this.desenvolvedores.push(desenvolvedor);
-      console.log(`Desenvolvedor ${desenvolvedor.nome} adicionado ao projeto ${this.nome}.`);
-    }
-  }
-  
-  // Exemplo de uso
-  /*const db = new Database();
-  
-  const user1 = new User('user1@example.com', 'password123', 'User 1');
-  user1.save();
-  
-  const manager1 = new Manager('manager1@example.com', 'password456', 'Manager 1', 'IT');
-  manager1.save();
-  manager1.promoteDeveloper('developer1@example.com');
-  
-  const developer1 = new Developer('developer1@example.com', 'password789', 'Developer 1', 'JavaScript');
-  developer1.save();
-  developer1.code();
-  
-  const po1 = new ProductOwner('po1@example.com', 'passwordabc', 'Product Owner 1', 'Project X');
-  po1.save();
-  po1.prioritizeFeatures(['Feature 1', 'Feature 2']);*/
-  
+    
+    // Exemplo de uso
+    /*const db = new Database();
+    
+    const user1 = new User('user1@example.com', 'password123', 'User 1');
+    user1.save();
+    
+    const manager1 = new Manager('manager1@example.com', 'password456', 'Manager 1', 'IT');
+    manager1.save();
+    manager1.promoteDeveloper('developer1@example.com');
+    
+    const developer1 = new Developer('developer1@example.com', 'password789', 'Developer 1', 'JavaScript');
+    developer1.save();
+    developer1.code();
+    
+    const po1 = new ProductOwner('po1@example.com', 'passwordabc', 'Product Owner 1', 'Project X');
+    po1.save();
+    po1.prioritizeFeatures(['Feature 1', 'Feature 2']);*/
+    

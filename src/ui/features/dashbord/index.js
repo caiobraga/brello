@@ -20,6 +20,7 @@ import  Navbar  from '../../components/navbar';
 
 import { useHistory } from 'react-router-dom';
 
+import { Database } from '../../../data/bd.js';
 
 const DashboardScreen = () => {
     const history = useHistory();
@@ -35,8 +36,9 @@ const DashboardScreen = () => {
     // Simulating fetching projects associated with the user from the database
     const fetchProjects = async () => {
       // Assuming you have a function to fetch projects from the database
-      const fetchedProjects = await fetchProjectsFromDatabase();
-      setProjects(fetchedProjects);
+      const db = new Database();
+      const fetchedProjects =  db.fetchProjectsFromDatabase();
+      //setProjects(fetchedProjects);
       console.log(fetchedProjects);
     };
 
