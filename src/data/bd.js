@@ -21,9 +21,21 @@ export class Database {
         }
 
         
+        getListaUsuarios(){
+            return this.listaUsuarios
+        }
+
+
+
+        
         addUserLista(user) {
             this.listaUsuarios.push(user);
             console.log(`Usuário ${user.name} adicionado, email: ${user.email}.`);
+          }
+
+          addProjectInDatabase(projeto){
+            this.listaProjetos.push(projeto);
+            console.log(`Projeto ${projeto.nome} adicionado.`);
           }
     
         fetchProjectsFromDatabase() {
