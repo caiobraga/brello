@@ -28,10 +28,12 @@ class Database {
   }
   
   class User {
-    constructor(email, password, name) {
+    constructor(email, password, name, phone, cpf) {
       this.email = email;
       this.password = password;
       this.name = name;
+      this.cpf = cpf;
+      this.phone = phone;
     }
   
     
