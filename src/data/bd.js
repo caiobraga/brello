@@ -50,8 +50,8 @@ class Database {
       this.name = name;
       this.cpf = cpf;
       this.phone = phone;
+      console.log(`Usuario ${this.name} com email ${this.email} senha${this.password}.`);
     }
-    
     
   }
   

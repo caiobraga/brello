@@ -6,48 +6,7 @@ import './style.css';
 import backgroundImage from './logo.png'; // Import the image file
 
 import { useHistory } from 'react-router-dom';
-
-// Classe Database
-class Database {
-  constructor() {
-    if (Database.instance) {
-      return Database.instance;
-    }
-
-    // Simulating database connection
-    this.connect();
-
-    // Cria uma instância de User
-    this.user = new User('', '', '', '', '');
-
-    Database.instance = this;
-  }
-
-  connect() {
-    // Simulating database connection logic
-  }
-
-  saveUser(name, email, password, phone, cpf) {
-    // Atualiza as propriedades do objeto User
-    this.user.name = name;
-    this.user.email = email;
-    this.user.password = password;
-    this.user.phone = phone;
-    this.user.cpf = cpf;
-
-    // Aqui você pode adicionar a lógica real para salvar o usuário no banco de dados
-  }
-}
-
-class User {
-  constructor(email, password, name, phone, cpf) {
-    this.email = email;
-    this.password = password;
-    this.name = name;
-    this.cpf = cpf;
-    this.phone = phone;
-  }
-}
+import { Database } from '../../../data/bd.js';
 
 const SignupScreen = () => {
   const [name, setName] = useState('');
@@ -82,17 +41,23 @@ const SignupScreen = () => {
     event.preventDefault();
 
     // Atualiza o objeto User no banco de dados com os dados do formulário
-    const db = new Database();
-    db.saveUser(name, email, password, phone, cpf);
-
+    const db = new Database;  
+    
+    db.user.name = name;
+    db.user.email = email;
+    db.user.password = password;
+    db.user.phone = phone;
+    db.user.cpf = cpf;
+    
+    //user.setUser(user);
     // Reset the form
     setName('');
     setEmail('');
     setPassword('');
     setPhone('');
     setCpf('');
-    console.log(listaUsuarios);
-    //history.push('/dashbord');
+    //console.log(listaUsuarios);
+    history.push('/dashbord');
   };
 
   
