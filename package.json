@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest -t 'App.test.js'",
+    "test": "jest -t 'bancodedados.test.js'",
     "coverage": "jest --coverage",
     "eject": "react-scripts eject"
   },
