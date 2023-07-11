@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import {
   Box,
   Flex,
@@ -30,6 +30,18 @@ const DashboardScreen = () => {
   const handleButtonClick = () => {
     history.push('/projects');
   };
+
+  useEffect(() => {
+    // Simulating fetching projects associated with the user from the database
+    const fetchProjects = async () => {
+      // Assuming you have a function to fetch projects from the database
+      const fetchedProjects = await fetchProjectsFromDatabase();
+      setProjects(fetchedProjects);
+      console.log(fetchedProjects);
+    };
+
+    fetchProjects();
+  }, []);
 
   function randomColor() {
     const randPixel = () => 127 + Math.random() * 128;
