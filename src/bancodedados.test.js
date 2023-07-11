@@ -21,5 +21,17 @@ describe('Database', () => {
     expect(projects[0].gerente).toBe('Gerente 1');
   });
 
+  test('should create a new project', () => {
+    const user = new User('Emailteste', 'Senhateste', 'NomeTeste', 'numeroTeste', 'cpfTeste');
+
+    const ListaUser = database.getListaUsuarios;
+
+    expect(projects.length).toBe(1);
+    expect(projects[0].nome).toBe('Projeto 1');
+    expect(projects[0].descricao).toBe('Descrição do Projeto 1');
+    expect(projects[0].gerente).toBe('Gerente 1');
+  });
+
+
   // Adicione mais testes aqui
 });
