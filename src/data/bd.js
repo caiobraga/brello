@@ -24,7 +24,12 @@ export class Database {
         addUserLista(user) {
             this.listaUsuarios.push(user);
             console.log(`Usuário ${user.name} adicionado, email: ${user.email}.`);
-          }
+        }
+
+        getListaUsuarios(){
+            return this.listaUsuarios;
+        }
+
     
         fetchProjectsFromDatabase() {
             // Simulating fetching projects from the database
