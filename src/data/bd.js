@@ -9,19 +9,22 @@ export class Database {
     
         Database.instance = this;
 
-        var currentUser = null;
+        this.currentUser = null;
 
-        var listaUsuarios = [];
-        var litaGerentes = [];
-        var listaDesenvolvedores = [];
-        var listaPo = [];
-        var listaProjetos = [];
-        var listaQuadros = [];
-        var listaCartoes = [];
+        this.listaUsuarios = [];
+        this.litaGerentes = [];
+        this.listaDesenvolvedores = [];
+        this.listaPo = [];
+        this.listaProjetos = [];
+        this.listaQuadros = [];
+        this.listaCartoes = [];
         }
 
         
-
+        addUserLista(user) {
+            this.listaUsuarios.push(user);
+            console.log(`Usuário ${user.name} adicionado, email: ${user.email}.`);
+          }
     
         fetchProjectsFromDatabase() {
             // Simulating fetching projects from the database

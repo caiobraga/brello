@@ -8,6 +8,8 @@ import backgroundImage from './logo.png'; // Import the image file
 import { useHistory } from 'react-router-dom';
 import { Database } from '../../../data/bd.js';
 
+import {User} from '../../../data/bd.js';
+
 const SignupScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -43,11 +45,14 @@ const SignupScreen = () => {
     // Atualiza o objeto User no banco de dados com os dados do formulário
     const db = new Database;  
     
-    db.user.name = name;
-    db.user.email = email;
-    db.user.password = password;
-    db.user.phone = phone;
-    db.user.cpf = cpf;
+    const newUser = new User(email, password, name, phone, cpf);
+    db.addUserLista(newUser);
+
+    console.log('Name:', name);
+    console.log('Email:', email);
+    console.log('Password:', password);
+    console.log('Phone:', phone);
+    console.log('CPF:', cpf);
     
     //user.setUser(user);
     // Reset the form
