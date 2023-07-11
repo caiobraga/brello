@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import {
   Box,
   Flex,
@@ -20,6 +20,7 @@ import  Navbar  from '../../components/navbar';
 
 import { useHistory } from 'react-router-dom';
 
+import { Database } from '../../../data/bd.js';
 
 const DashboardScreen = () => {
     const history = useHistory();
@@ -30,6 +31,19 @@ const DashboardScreen = () => {
   const handleButtonClick = () => {
     history.push('/projects');
   };
+
+  useEffect(() => {
+    // Simulating fetching projects associated with the user from the database
+    const fetchProjects = async () => {
+      // Assuming you have a function to fetch projects from the database
+      const db = new Database();
+      const fetchedProjects =  db.fetchProjectsFromDatabase();
+      //setProjects(fetchedProjects);
+      console.log(fetchedProjects);
+    };
+
+    fetchProjects();
+  }, []);
 
   function randomColor() {
     const randPixel = () => 127 + Math.random() * 128;
