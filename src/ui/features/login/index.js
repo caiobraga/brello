@@ -5,9 +5,14 @@ import { Link, Text } from '@chakra-ui/react';
 import './style.css';
 import backgroundImage from './logo.png'; // Import the image file
 
+import { useHistory } from 'react-router-dom';
+
+
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const history = useHistory();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -26,6 +31,8 @@ const LoginScreen = () => {
     // Reset the form
     setEmail('');
     setPassword('');
+
+    history.push('/dashbord');
   };
 
   return (
