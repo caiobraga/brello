@@ -5,12 +5,16 @@ import { Link } from '@chakra-ui/react';
 import './style.css';
 import backgroundImage from './logo.png'; // Import the image file
 
+import { useHistory } from 'react-router-dom';
+
 const SignupScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [cpf, setCpf] = useState('');
+
+  const history = useHistory();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -44,6 +48,7 @@ const SignupScreen = () => {
     setPassword('');
     setPhone('');
     setCpf('');
+    history.push('/dashbord');
   };
 
   return (
