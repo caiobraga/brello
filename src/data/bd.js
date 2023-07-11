@@ -26,6 +26,22 @@ class Database {
     
   
   }
+
+  class GetId {
+    constructor() {
+      if (GetId.instance) {
+        return GetId.instance;
+      }
+  
+      this.id = 0;
+  
+      GetId.instance = this;
+    }
+  
+    getId() {
+      return this.id++;
+    }
+  }
   
   class User {
     constructor(email, password, name) {
@@ -64,13 +80,13 @@ class Database {
   }
 
   class Projeto {
-    constructor(nome, descricao, gerente, quadros) {
+    constructor(nome, descricao, gerente) {
+      this.idProjeto = GetId().getId();
       this.nome = nome;
       this.descricao = descricao;
       this.dataInicio = dataInicio;
       this.dataFim = dataFim;
       this.gerente = gerente;
-      this.quadros = quadros;
     }
   }
   
