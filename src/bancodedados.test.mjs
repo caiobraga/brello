@@ -44,6 +44,69 @@ describe('Database', () => {
     
   });
 
+  test('should create a new project', () => {
+    const database = new Database();
+    const projeto = new Projeto('Projeto Teste', 'Descrição do Projeto', 'Gerente Teste');
+    database.addProjectInDatabase(projeto);
+  
+    const listaProjetos = database.fetchProjectsFromDatabase();
+    const tamanho = listaProjetos.length;
+  
+    const projetoAdicionado = listaProjetos[0];
+    const nomeProjeto = projetoAdicionado.nome;
+    const descricaoProjeto = projetoAdicionado.descricao;
+    const gerenteProjeto = projetoAdicionado.gerente;
+  
+    expect(tamanho).toBe(1);
+    expect(nomeProjeto).toBe('Projeto Teste');
+    expect(descricaoProjeto).toBe('Descrição do Projeto');
+    expect(gerenteProjeto).toBe('Gerente Teste');
+  });
+
+
+  test('should promote a developer to manager', () => {
+    const database = new Database();
+    const developer = new Developer('dev@example.com', 'password', 'Dev', 'JavaScript');
+    database.addUserLista(developer);
+
+    const manager = new Manager('manager@example.com', 'password', 'Manager', 'IT');
+    database.addUserLista(manager);
+
+    manager.promoteDeveloper(developer.email);
+
+    expect(manager.department).toBe('IT');
+    expect(manager.name).toBe('Manager');
+    expect(developer.name).toBe('Dev');
+  });
+
+  test('should add a new project', () => {
+    const manager = new Manager('manager@example.com', 'password', 'Manager', 'IT');
+    database.addUserLista(manager);
+
+    const project = new Projeto('Project X', 'Description', manager);
+    database.addProjectInDatabase(project);
+
+    const projects = database.fetchProjectsFromDatabase();
+
+    expect(projects.length).toBe(1);
+    expect(projects[0].nome).toBe('Project X');
+    expect(projects[0].gerente).toBe(manager);
+  });
+});
+
+describe('GetId', () => {
+  test('should generate unique IDs', () => {
+    const getId = new GetId();
+    const id1 = getId.getId();
+    const id2 = getId.getId();
+    const id3 = getId.getId();
+
+    expect(id1).toBe(0);
+    expect(id2).toBe(1);
+    expect(id3).toBe(2);
+  });
+
+
 
   // Adicione mais testes aqui
 });
