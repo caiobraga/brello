@@ -25,7 +25,7 @@ describe('Database', () => {
 
   test('should create a new project', () => {
     const database = new Database();
-    const user = new User('emailteste@gmail.com', 'Senhateste', 'NomeTeste', 'numeroTeste', '11111');
+    const user = new User('emailteste@gmail.com', 'Senhateste', 'NomeTeste', '339887521', '11111');
     database.addUserLista(user);
 
     const listaUser = database.getListaUsuarios();
@@ -35,12 +35,14 @@ describe('Database', () => {
     const cpf = listaUser[0].cpf;
     const email = listaUser[0].email;
     const senha = listaUser[0].password;
+    const numero = listaUser[0].phone;
 
     expect(tamanho).toBe(1);
     expect(nomeListaUser).toBe('NomeTeste');
     expect(cpf).toBe('11111');
     expect(email).toBe('emailteste@gmail.com');
     expect(senha).toBe('Senhateste');
+    expect(numero).toBe('339887521');
     
   });
 
