@@ -24,6 +24,7 @@ describe('Database', () => {
   });
 
   test('should create a new project', () => {
+    const database = new Database();
     const user = new User('Emailteste', 'Senhateste', 'NomeTeste', 'numeroTeste', 'cpfTeste');
 
     const listaUser = database.getListaUsuarios();
