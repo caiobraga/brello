@@ -9,6 +9,8 @@ class Database {
   
       Database.instance = this;
 
+      var currentUser = null;
+
       var listaUsuarios = [];
       var litaGerentes = [];
       var listaDesenvolvedores = [];
@@ -58,6 +60,17 @@ class Database {
     constructor(email, password, name, project) {
       super(email, password, name);
       this.project = project;
+    }
+  }
+
+  class Projeto {
+    constructor(nome, descricao, gerente, quadros) {
+      this.nome = nome;
+      this.descricao = descricao;
+      this.dataInicio = dataInicio;
+      this.dataFim = dataFim;
+      this.gerente = gerente;
+      this.quadros = quadros;
     }
   }
   
