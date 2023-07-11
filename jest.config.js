@@ -1,5 +1,10 @@
 module.exports = {
+    transform: {},
+    testMatch: ['**/src/**/*.test.mjs'],
+    setupFiles: ['<rootDir>/setup.js'],
+    testEnvironment: 'node',
     transform: {
-      '^.+\\.jsx?$': 'babel-jest',
-    },
+        '^.+\\.m?js$': 'babel-jest',
+      },
   };
+  

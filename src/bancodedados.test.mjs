@@ -1,17 +1,19 @@
 
 
 
-
+import {Database,Developer, GetId, Manager, ProductOwner, Projeto, User} from './data/bd';
 describe('Database', () => {
-  let database;
+  
 
   beforeEach(() => {
-    database = new Database();
+    const database = new Database();
   });
 
   test('should create a new project', () => {
+    
+
     const projeto = new Projeto('Projeto 1', 'Descrição do Projeto 1', 'Gerente 1');
-    database.listaProjetos = [projeto];
+    database.addProjectInDatabase(projeto);
 
     const projects = database.fetchProjectsFromDatabase();
 
