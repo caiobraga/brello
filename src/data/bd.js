@@ -51,7 +51,7 @@ class Database {
       this.cpf = cpf;
       this.phone = phone;
     }
-  
+    
     
   }
   

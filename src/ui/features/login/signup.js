@@ -7,6 +7,48 @@ import backgroundImage from './logo.png'; // Import the image file
 
 import { useHistory } from 'react-router-dom';
 
+// Classe Database
+class Database {
+  constructor() {
+    if (Database.instance) {
+      return Database.instance;
+    }
+
+    // Simulating database connection
+    this.connect();
+
+    // Cria uma instância de User
+    this.user = new User('', '', '', '', '');
+
+    Database.instance = this;
+  }
+
+  connect() {
+    // Simulating database connection logic
+  }
+
+  saveUser(name, email, password, phone, cpf) {
+    // Atualiza as propriedades do objeto User
+    this.user.name = name;
+    this.user.email = email;
+    this.user.password = password;
+    this.user.phone = phone;
+    this.user.cpf = cpf;
+
+    // Aqui você pode adicionar a lógica real para salvar o usuário no banco de dados
+  }
+}
+
+class User {
+  constructor(email, password, name, phone, cpf) {
+    this.email = email;
+    this.password = password;
+    this.name = name;
+    this.cpf = cpf;
+    this.phone = phone;
+  }
+}
+
 const SignupScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -39,8 +81,9 @@ const SignupScreen = () => {
   const handleSignup = (event) => {
     event.preventDefault();
 
-    // Perform signup logic here, such as making an API call
-    // with the entered name, email, password, phone, and cpf to create a new user
+    // Atualiza o objeto User no banco de dados com os dados do formulário
+    const db = new Database();
+    db.saveUser(name, email, password, phone, cpf);
 
     // Reset the form
     setName('');
@@ -48,9 +91,11 @@ const SignupScreen = () => {
     setPassword('');
     setPhone('');
     setCpf('');
-    history.push('/dashbord');
+    console.log(listaUsuarios);
+    //history.push('/dashbord');
   };
 
+  
   return (
     <Box
       display="flex"
