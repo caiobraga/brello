@@ -84,9 +84,15 @@ class Database {
       this.idProjeto = GetId().getId();
       this.nome = nome;
       this.descricao = descricao;
-      this.dataInicio = dataInicio;
-      this.dataFim = dataFim;
+      this.dataInicio = new Date();
+      this.dataFim = null;
       this.gerente = gerente;
+      this.desenvolvedores = [];
+    }
+  
+    adicionarDesenvolvedor(desenvolvedor) {
+      this.desenvolvedores.push(desenvolvedor);
+      console.log(`Desenvolvedor ${desenvolvedor.nome} adicionado ao projeto ${this.nome}.`);
     }
   }
   
