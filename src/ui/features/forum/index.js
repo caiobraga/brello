@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 import {
   Box,
+  Center,
   Flex,
   Heading,
   Input,
@@ -25,62 +26,38 @@ const Topic = ({ title }) => {
   )
 }
 
-
 const ForumScreen = () => {
   const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    // Simulated API call to fetch forum posts
-    fetchPosts();
-  }, []);
+  const [text, setText] = useState("");
+  
 
 
-  const fetchPosts = () => {
-    // Simulated data
-    const dummyPosts = [
-      { id: 1, title: 'First Post', content: 'This is the first post.' },
-      { id: 2, title: 'Second Post', content: 'This is the second post.' },
-      { id: 3, title: 'Third Post', content: 'This is the third post.' },
-    ];
-
-    setPosts(dummyPosts);
-  };
+ function handleInput(){
+  setPosts(posts.concat(<Topic title={text}></Topic>))
+ }
 
   return (
 
-    <Box>
+    <Box p = "20px">
       <Navbar></Navbar>
       <h2 className='homeTitle'>Faça sua pergunta</h2>
-      <form onSubmit={posts}>
-        <Flex>
+        <Flex alignItems={"center"}>
           <Input
             flex="1"
             mr={2}
             size='md'
+            maxW={"500px"}
             placeholder="CRIAR TOPICO"
+            onChange={text=>{
+              setText(text.target.value)
+            }}
           />
-          <Button colorScheme='blue' size='xs' >POSTAR </Button>
+          <Button colorScheme='blue' size='xs' onClick={handleInput} >POSTAR </Button>
         </Flex>
-
-      </form>
       <Flex flexDirection='column' p = '20px' gap = '10px'>
-        <Topic title='TOPICO 1'>
-    
-        </Topic>
-        <Topic title='TOPICO 2'>
-
-        </Topic>
-
-        <Topic title='TOPICO 3'>
-
-        </Topic>
-
-
+        {posts}
       </Flex>
     </Box>
-
-
-
   );
 };
 
